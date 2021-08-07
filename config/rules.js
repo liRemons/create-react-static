@@ -1,15 +1,16 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// test ： 所应用的规则
-// exclude: 忽略处理的文件
-// use ：可使用多个loader，自下向上执行
+const path = require("path");
+// test: the applied rule.
+// exclude: ignore processed files.
+// use: multiple loaders can be used to run from bottom to top.
 
-// 兼容性处理
+// Handle compatibility
 const postcssLoader = {
   loader: "postcss-loader",
   // options: {
-  //   postcssOptions: {
-  //     plugins: [["postcss-preset-env", {}]],
-  //   },
+  // postcssOptions: {
+  // plugins: [["postcss-preset-env", {}]]
+  // },
   // },
 };
 
@@ -19,13 +20,15 @@ const rules = [
       // css
       {
         test: /\.css$/,
-        // MiniCssExtractPlugin.loader 插件将 css 提取为单独的文件
-        // 和 style-loader 不同，style-loader 将css 插入到style标签
+        include: path.resolve(__dirname, "../src"),
+        // MiniCssExtractPlugin.loader plug-in extracts css as a separate file.
+        // Unlike style-loader, style-loader inserts css into the style tag.
         use: [MiniCssExtractPlugin.loader, "css-loader", postcssLoader],
       },
       // less
       {
         test: /\.less$/,
+        include: path.resolve(__dirname, "../src"),
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
@@ -33,9 +36,10 @@ const rules = [
           "less-loader",
         ],
       },
-      // 处理图片
+      // Process images.
       {
         test: /\.(jpg|png|jpeg|gif)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: "url-loader",
@@ -48,20 +52,26 @@ const rules = [
           },
         ],
       },
-      // HTML中静态资源
+      // Static resources in HTML
       {
-        test: /\.html$/,
+        test: /\.html$ /,
+        exclude: /node_modules/,
         loader: "html-loader",
         options: {
           esModule: false,
         },
       },
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules)/,
-        use: ["babel-loader"],
+        test: /\.js|jsx$/,
+        include: path.resolve(__dirname, "../src"),
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
-      // 其它资源
+      // Other resources
       {
         exclude: /.(js|html|css|less|jpe?g|png|gif)$/,
         use: [
