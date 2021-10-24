@@ -6,6 +6,7 @@ const ProgressPlugin = require("progress-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpackDashboard = require('webpack-dashboard/plugin');
 const path = require("path");
 const rules = require("./config/rules");
 /**
@@ -23,9 +24,9 @@ module.exports = (env, args) => {
     mode,
     output: {
       filename: (pathData) => {
-        return pages.includes(pathData.runtime) ? '[name]/js/[contenthash:10].js' : 'static/[name].js'
+        return pages.includes(pathData.runtime) ? 'static/[name]/js/[contenthash:10].js' : 'static/[name].js'
       },
-      path: path.resolve(__dirname, "dist/pages/"),
+      path: path.resolve(__dirname, "dist/"),
       // publicPath: mode === 'development' ? '/' : undefined,
       clean: true,
     },
@@ -60,6 +61,7 @@ module.exports = (env, args) => {
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
+      'antd': 'antd'
     },
     plugins: [
       ...pages.map((pageName) => {
@@ -78,6 +80,7 @@ module.exports = (env, args) => {
       // 进度
       new ProgressPlugin(true),
       new CleanWebpackPlugin(),
+      new webpackDashboard(),
       // new BundleAnalyzerPlugin({
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })

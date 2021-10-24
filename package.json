@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node scripts/dev.js",
     "dev": "npm start",
-    "build": "node scripts/build.js"
+    "build": "webpack-dashboard -a -- node scripts/build.js"
   },
   "author": "",
   "license": "ISC",
@@ -47,6 +47,7 @@
     "customize-cra": "^1.0.0",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.8",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "webpack-dashboard": "^3.3.6"
   }
 }
