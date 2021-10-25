@@ -24,7 +24,7 @@ module.exports = (env, args) => {
     mode,
     output: {
       filename: (pathData) => {
-        return pages.includes(pathData.runtime) ? 'static/[name]/js/[contenthash:10].js' : 'static/[name].js'
+        return pages.includes(pathData.runtime) ? '[name]/js/[contenthash:10].js' : '[name].js'
       },
       path: path.resolve(__dirname, "dist/"),
       // publicPath: mode === 'development' ? '/' : undefined,
@@ -42,10 +42,15 @@ module.exports = (env, args) => {
         })
       ],
       splitChunks: {
-        name: mode,
+        name: 'verdor',
         minSize: 20000,
         maxSize: 1024 * 500,
         chunks: "all",
+        cacheGroups: {
+          defaultVendors: {
+            filename: '[name].bundle.js'
+          }
+        }
       }
     },
     module: {

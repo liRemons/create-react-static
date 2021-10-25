@@ -1,15 +1,21 @@
-import { Store } from '@royjs/core';
+import { makeAutoObservable } from 'mobx'
 
-export default new Store({
-  state : {
-    count: 0
-  },
-  actions:{
-    add(state, payload){
-      state.count ++
-    },
-    reduce(state, payload){
-      state.count --
-    }
+class Store {
+  price = 1;
+  amount = 10;
+  constructor(){
+    makeAutoObservable(this); 
   }
-})
+
+  get total() {
+    return this.price * this.amount;
+  }
+
+  changePrice() {
+    this.price ++
+  }
+}
+
+const store  = new Store();
+
+export default store;
