@@ -27,7 +27,7 @@ module.exports = (env, args) => {
         return pages.includes(pathData.runtime) ? '[name]/js/[contenthash:10].js' : '[name].js'
       },
       path: path.resolve(__dirname, "dist/"),
-      // publicPath: mode === 'development' ? '/' : undefined,
+      publicPath: '/',
       clean: true,
     },
     optimization: {
@@ -66,7 +66,9 @@ module.exports = (env, args) => {
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
-      'antd': 'antd'
+      'antd': 'antd',
+      'mobx': 'mobx',
+      'mobx-react': 'mobxReact'
     },
     plugins: [
       ...pages.map((pageName) => {
@@ -82,8 +84,6 @@ module.exports = (env, args) => {
       }),
       // 压缩css
       new CssMinimizerPlugin(),
-      // 进度
-      new ProgressPlugin(true),
       new CleanWebpackPlugin(),
       new webpackDashboard(),
       // new BundleAnalyzerPlugin({
@@ -94,6 +94,7 @@ module.exports = (env, args) => {
       contentBase: path.join(__dirname, "dist"),
       compress: true,
       port: 3000,
+      host: '127.0.0.1',
       open: true,
       hot: true,
     },
