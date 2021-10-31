@@ -98,7 +98,7 @@ module.exports = (env, args) => {
       open: true,
       hot: true,
     },
-    devtool: "eval",
+    devtool: "eval-source-map",
   };
 
   return config;
