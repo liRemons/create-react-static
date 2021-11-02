@@ -73,7 +73,7 @@ const rules = [
       },
       // Other resources
       {
-        exclude: /.(js|html|css|less|jpe?g|png|gif)$/,
+        test: /.(pdf|doc|node)$/,
         use: [
           {
             loader: "file-loader",
