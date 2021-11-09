@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node scripts/dev.js",
     "dev": "npm start",
-    "build": "webpack-dashboard -a -- node scripts/build.js"
+    "build": "node scripts/build.js"
   },
   "author": "",
   "license": "ISC",
@@ -37,8 +37,7 @@
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
-    "compression-webpack-plugin": "^8.0.1",
-    "webpack-dashboard": "^3.3.6"
+    "compression-webpack-plugin": "^8.0.1"
   },
   "dependencies": {
     "antd": "^4.16.8",

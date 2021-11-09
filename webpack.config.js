@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const webpackDashboard = require("webpack-dashboard/plugin");
 const path = require("path");
 const rules = require("./config/rules");
 /**
@@ -87,7 +86,6 @@ module.exports = (env, args) => {
       // 压缩css
       new CssMinimizerPlugin(),
       new CleanWebpackPlugin(),
-      new webpackDashboard(),
       // new BundleAnalyzerPlugin({
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })
@@ -98,6 +96,7 @@ module.exports = (env, args) => {
       port: 3033,
       host: "127.0.0.1",
       open: true,
+      openPage: env.pages.split(",")[0],
       hot: true,
     },
     devtool: mode === "development" ? "eval-source-map" : "eval",
