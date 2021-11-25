@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const path = require("path");
 const rules = require("./config/rules");
 /**
@@ -89,6 +90,10 @@ module.exports = (env, args) => {
       // new BundleAnalyzerPlugin({
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })
+      new ESLintPlugin({
+        extensions: ["js", "json", "jsx"],
+        exclude: "/node_modules/",
+      }),
     ],
     devServer: {
       contentBase: path.join(__dirname, "dist"),

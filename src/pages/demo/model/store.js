@@ -1,10 +1,12 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from "mobx";
 
 class Store {
   price = 1;
+
   amount = 10;
-  constructor(){
-    makeAutoObservable(this); 
+
+  constructor() {
+    makeAutoObservable(this);
   }
 
   get total() {
@@ -12,10 +14,10 @@ class Store {
   }
 
   changePrice() {
-    this.price ++
+    this.price += 1;
   }
 }
 
-const store  = new Store();
+const store = new Store();
 
 export default store;

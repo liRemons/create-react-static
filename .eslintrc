@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb-base/legacy",
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "no-unused-vars": "warn",
+    "eqeqeq": "warn",
+    "no-prototype-builtins": "warn",
+    "class-methods-use-this": "off",
+    "linebreak-style": ["off", "windows"]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "parserOptions": {}
+}
