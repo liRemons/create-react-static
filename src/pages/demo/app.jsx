@@ -1,7 +1,8 @@
+import React from 'react';
 import { Button, Form, Card } from 'antd';
 import FormItem from '@components/Form';
-import store from './model/store'
-import { observer } from 'mobx-react'
+import store from './model/store';
+import { observer } from 'mobx-react';
 
 @observer
 export default class App extends React.Component {
@@ -20,6 +21,6 @@ export default class App extends React.Component {
           <Button onClick={()=>store.changePrice()}> + </Button>
         </Form.Item>
       </Form>
-    </Card>
+    </Card>;
   }
 }

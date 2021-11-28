@@ -1,12 +1,18 @@
 {
-  "extends": "airbnb-base/legacy",
+  "extends": [
+    "airbnb-base/legacy",
+    "plugin:react/recommended"
+  ],
   "parser": "@babel/eslint-parser",
   "rules": {
     "no-unused-vars": "warn",
     "eqeqeq": "warn",
     "no-prototype-builtins": "warn",
     "class-methods-use-this": "off",
-    "linebreak-style": ["off", "windows"]
+    "linebreak-style": ["off", "windows"],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "object-curly-newline": [2, { "multiline": true, "consistent": true }]
   },
   "env": {
     "browser": true,
