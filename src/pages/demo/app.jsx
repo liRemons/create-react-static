@@ -3,10 +3,12 @@ import { Button, Form, Card } from 'antd';
 import FormItem from '@components/Form';
 import store from './model/store';
 import { observer } from 'mobx-react';
+import { queryTechClassList } from '@api';
 
 @observer
 export default class App extends React.Component {
   render() {
+    queryTechClassList()
     const { total } = store;
     return <Card>
       <Form
@@ -18,7 +20,7 @@ export default class App extends React.Component {
         <FormItem label='选择器' component='select'></FormItem>
         <FormItem label='多选' component='checkbox'></FormItem>
         <Form.Item>
-          <Button onClick={()=>store.changePrice()}> + </Button>
+          <Button onClick={() => store.changePrice()}> + </Button>
         </Form.Item>
       </Form>
     </Card>;

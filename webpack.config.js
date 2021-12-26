@@ -61,6 +61,8 @@ module.exports = (env, args) => {
       alias: {
         '@': path.resolve(__dirname, 'src'),
         '@components': path.resolve(__dirname, 'src/components'),
+        '@api': path.resolve(__dirname, 'src/utils/api'),
+        '@config': path.resolve(__dirname, 'src/config'),
       },
     },
     externals: {
@@ -101,6 +103,12 @@ module.exports = (env, args) => {
       open: true,
       openPage: env.pages.split(',')[0],
       hot: true,
+      proxy: {
+        '/api/': {
+          target: 'http://8.136.206.131:3009',
+          changeOrigin: true,
+        },
+      },
     },
     devtool: mode === 'development' ? 'eval-source-map' : 'source-map',
   }
