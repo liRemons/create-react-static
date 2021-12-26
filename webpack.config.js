@@ -102,7 +102,7 @@ module.exports = (env, args) => {
       openPage: env.pages.split(',')[0],
       hot: true,
     },
-    devtool: mode === 'development' ? 'eval-source-map' : 'eval',
+    devtool: mode === 'development' ? 'eval-source-map' : 'source-map',
   }
 
   return config
