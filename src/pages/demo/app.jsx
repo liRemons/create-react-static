@@ -3,12 +3,15 @@ import { Button, Form, Card } from 'antd';
 import FormItem from '@components/Form';
 import store from './model/store';
 import { observer } from 'mobx-react';
-import { queryTechClassList } from '@api';
 
 @observer
 export default class App extends React.Component {
+  componentDidMount() {
+    store.getArticleList()
+  }
+  
+
   render() {
-    queryTechClassList()
     const { total } = store;
     return <Card>
       <Form
