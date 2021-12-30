@@ -89,10 +89,10 @@ module.exports = (env, args) => {
       // new BundleAnalyzerPlugin({
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })
-      new ESLintPlugin({
+      mode === 'development' ?  new ESLintPlugin({
         extensions: ['js', 'json', 'jsx']
-      }),
-    ],
+      }):'',
+    ].filter(_ => _),
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
