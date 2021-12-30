@@ -14,7 +14,7 @@ const rules = require('./config/rules')
 module.exports = (env, args) => {
   const mode = args.mode
   const pages = env.pages.split(',')
-  const srcPagesDir = path.resolve(__dirname, 'src/pages/')
+  const srcPagesDir = path.resolve(__dirname, 'src/apps/')
   const entry = {}
   pages.forEach((el) => (entry[el] = path.resolve(srcPagesDir, el, 'main.jsx')))
   const config = {
@@ -90,8 +90,7 @@ module.exports = (env, args) => {
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })
       new ESLintPlugin({
-        extensions: ['js', 'json', 'jsx'],
-        exclude: '/node_modules/',
+        extensions: ['js', 'json', 'jsx']
       }),
     ],
     devServer: {

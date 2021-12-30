@@ -14,6 +14,15 @@ const postcssLoader = {
   // },
 };
 
+const cssMoudleLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: {
+      localIdentName: '[path][name]-[local]-[hash:base64:10]'
+    },
+  }
+}
+
 const rules = [
   {
     oneOf: [
@@ -31,7 +40,7 @@ const rules = [
         include: path.resolve(__dirname, "../src"),
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          cssMoudleLoader,
           postcssLoader,
           "less-loader",
         ],
