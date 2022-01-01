@@ -42,13 +42,23 @@ module.exports = (env, args) => {
         }),
       ],
       splitChunks: {
-        name: 'verdor',
+        chunks: 'async',
         minSize: 20000,
-        maxSize: 1024 * 500,
-        chunks: 'all',
+        minRemainingSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
         cacheGroups: {
           defaultVendors: {
-            filename: '[name].bundle.js',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
           },
         },
       },
@@ -62,6 +72,7 @@ module.exports = (env, args) => {
         '@': path.resolve(__dirname, 'src'),
         '@components': path.resolve(__dirname, 'src/components'),
         '@axios': path.resolve(__dirname, 'src/axios'),
+        '@assets': path.resolve(__dirname, 'src/assets'),
       },
     },
     externals: {
@@ -70,6 +81,8 @@ module.exports = (env, args) => {
       antd: 'antd',
       mobx: 'mobx',
       'mobx-react': 'mobxReact',
+      classnames: 'classnames',
+      axios: 'axios',
     },
     plugins: [
       ...pages.map((pageName) => {
@@ -89,10 +102,12 @@ module.exports = (env, args) => {
       // new BundleAnalyzerPlugin({
       //   analyzerMode: mode === 'production' ? 'server' : 'disabled'
       // })
-      mode === 'development' ?  new ESLintPlugin({
-        extensions: ['js', 'json', 'jsx']
-      }):'',
-    ].filter(_ => _),
+      mode === 'development'
+        ? new ESLintPlugin({
+            extensions: ['js', 'json', 'jsx'],
+          })
+        : '',
+    ].filter((_) => _),
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
@@ -100,7 +115,7 @@ module.exports = (env, args) => {
       host: '127.0.0.1',
       open: true,
       openPage: env.pages.split(',')[0],
-      hot: true
+      hot: true,
     },
     devtool: mode === 'development' ? 'eval-source-map' : 'source-map',
   }
