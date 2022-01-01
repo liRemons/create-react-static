@@ -13,9 +13,11 @@
 一个完整页面包含以下部分
 
 ```dockerfile
-├── demo
+├── app
 │   ├── app.jsx
 │   ├── main.jsx
+│   ├── pages
+│       └── List.jsx
 │   └── model
 │       └── store.js
 ```
@@ -36,33 +38,15 @@
   页面的 UI 渲染入口，当然也可以写业务代码，示例如下：
 
   ```jsx
-  import { Button, Form, Card } from 'antd';
-  import FormItem from '@components/Form';
-  import store from './model/store'
-  import { observer } from 'mobx-react'
+  import React from 'react';
+  import List from './pages/List';
   
-  @observer
-  export default class App extends React.Component {
-    render() {
-      const { total } = store;
-      return <Card>
-        <Form
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 20 }}
-        >
-          <FormItem label='数字输入' component='inputNumber' value={total}></FormItem>
-          <FormItem label='输入' component='input'></FormItem>
-          <FormItem label='选择器' component='select'></FormItem>
-          <FormItem label='多选' component='checkbox'></FormItem>
-          <Form.Item>
-            <Button onClick={()=>store.changePrice()}> + </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    }
+  
+  export default function App () {
+    return <List />
   }
   ```
-
+  
 - model/store.jsx
 
   每个页面的状态管理，由于每个页面互不关联，所以每个页面都有独立的状态管理，示例：
@@ -91,6 +75,22 @@
   export default store;
   ```
 
+- pages/List.jsx
+
+  ```jsx
+  import React, { useEffect } from 'react';
+  import { useObserver, useLocalObservable } from 'mobx-react';
+  import store from '../model/store';
+  
+  
+  export default function List() {
+    const localStore = useLocalObservable(() => store);
+    return useObserver(() => <>{localStore.price}</>)
+  }
+  ```
+
+  
+
 ##### 基础组件封装
 
 目前仅对 `form` 组件进行简单的封装，也可以自己封装其它组件，参见 `component/Form`
@@ -103,17 +103,21 @@
 ├── src
 │   ├── assets
 │   ├── components
-│   └── pages
+│   └── app
 │       ├── demo
 │       │   ├── app.jsx
 │       │   ├── main.jsx
+│       │   └── pages
+│       │       └── List.jsx
 │       │   └── model
 │       │       └── store.js
 │       └── demo2
-│           ├── app.jsx
-│           ├── main.jsx
-│           └── model
-│               └── store.js
+│       │   ├── app.jsx
+│       │   ├── main.jsx
+│       │   └── pages
+│       │       └── List.jsx
+│       │   └── model
+│       │       └── store.js
 ```
 
 - 直接运行 `npm run start`, 会同时运行 `demo`、`demo2`

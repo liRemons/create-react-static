@@ -81,7 +81,7 @@ module.exports = (env, args) => {
       antd: 'antd',
       mobx: 'mobx',
       'mobx-react': 'mobxReact',
-      classnames: 'classnames',
+      classnames: 'classNames',
       axios: 'axios',
     },
     plugins: [
