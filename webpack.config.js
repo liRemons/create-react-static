@@ -86,10 +86,15 @@ module.exports = (env, args) => {
     },
     plugins: [
       ...pages.map((pageName) => {
+        const pageInfo =
+          pagesJSON.find((item) => item.pageName === pageName) || {}
         return new HtmlWebpackPlugin({
           filename: `${pageName}/index.html`,
           chunks: [pageName],
           template: path.resolve(__dirname, 'src/index.html'),
+          templateParameters: {
+            title: `${pageInfo.title || ''}`,
+          },
         })
       }),
       // 提取单独的CSS
@@ -105,6 +110,8 @@ module.exports = (env, args) => {
       mode === 'development'
         ? new ESLintPlugin({
             extensions: ['js', 'json', 'jsx'],
+            fix: true,
+            failOnError: false,
           })
         : '',
     ].filter((_) => _),
