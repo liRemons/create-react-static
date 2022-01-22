@@ -17,7 +17,6 @@ class Store {
   async getArticleList() {
     const { data: articleList } = await queryArticleList();
     console.log(articleList);
-    // https://vip6.3sybf.com/20210924/kE59gdKo/2000kb/hls/index.m3u8
   }
 
   changePrice() {
