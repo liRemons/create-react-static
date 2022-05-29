@@ -5,40 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link
-      href="https://cdn.bootcdn.net/ajax/libs/antd/4.16.9/antd.min.css"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="http://remons.cn:3009/upload/info/favicon.ico" />
+    <% for (const i in externals_css) {%>
+    <link rel="stylesheet" href="<%= externals_css[i] %>" />
+    <%} %>
+    <style>
+      #container {
+        height: 100%;
+        width: 100%;
+      }
+
+      #loading {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: none;
+      }
+
+      .loadingVerlay {
+        background-color: rgba(22, 22, 22, 0.225);
+        z-index: 10000;
+      }
+    </style>
   </head>
 
   <body>
     <div id="container"></div>
     <div id="loading"></div>
-    <script
-      crossorigin
-      src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.production.min.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://cdn.bootcdn.net/ajax/libs/antd/4.16.9/antd.min.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://cdn.bootcdn.net/ajax/libs/axios/0.24.0/axios.min.js"
-    ></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/classnames/2.3.1/index.min.js"></script>
-    <script
-      crossorigin
-      src="https://cdn.bootcdn.net/ajax/libs/mobx/6.3.2/mobx.umd.production.min.js"
-    ></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/mobx-react-lite/3.1.6/mobxreactlite.umd.production.min.js"></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/mobx-react@7.2.1/dist/mobxreact.umd.production.min.js"
-    ></script>
+    <% for (const i in externals_js) {%>
+    <script crossorigin src="<%= externals_js[i] %>"></script>
+    <%} %>
   </body>
 </html>
