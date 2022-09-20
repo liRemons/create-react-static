@@ -1,17 +1,11 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path')
-// test: the applied rule.
-// exclude: ignore processed files.
-// use: multiple loaders can be used to run from bottom to top.
-
-// Handle compatibility
+const path = require('path');
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 const postcssLoader = {
-  loader: 'postcss-loader',
-  // options: {
-  // postcssOptions: {
-  // plugins: [["postcss-preset-env", {}]]
-  // },
-  // },
+  loader: 'postcss-loader'
 }
 
 const cssMoudleLoader = {
@@ -29,17 +23,17 @@ const rules = [
     oneOf: [
       // css
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, '../src'),
-        // MiniCssExtractPlugin.loader plug-in extracts css as a separate file.
-        // Unlike style-loader, style-loader inserts css into the style tag.
+        test: cssRegex,
+        exclude: cssModuleRegex,
         use: [MiniCssExtractPlugin.loader, 'css-loader', postcssLoader],
+      },
+      {
+        test: cssModuleRegex,
+        use: [MiniCssExtractPlugin.loader, cssMoudleLoader, 'css-loader', postcssLoader],
       },
       // less
       {
-        test: new RegExp(`^(?!.*\\.global).*\\.less`),
-        include: path.resolve(__dirname, '../src'),
-        include: path.resolve(__dirname, '../src'),
+        test: lessModuleRegex,
         use: [
           MiniCssExtractPlugin.loader,
           cssMoudleLoader,
@@ -48,8 +42,8 @@ const rules = [
         ],
       },
       {
-        test: new RegExp(`^(.*\\.global).*\\.less`),
-        include: path.resolve(__dirname, '../src'),
+        test: lessRegex,
+        exclude: lessModuleRegex,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -89,6 +83,7 @@ const rules = [
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
+            plugins: ['react-refresh/babel']
           },
         },
       },
@@ -108,14 +103,13 @@ const rules = [
             options: {
               outputPath: (url, resourcePath) => {
                 console.log(resourcePath);
-                return `${
-                  (resourcePath || '')
-                    .replace(/\//g, '_')
-                    .replace(/\\/g, '_')
-                    .split('apps')[1]
-                    .split('_')
-                    .filter((_) => !!_)[0]
-                }/assets/file/${url}`
+                return `${(resourcePath || '')
+                  .replace(/\//g, '_')
+                  .replace(/\\/g, '_')
+                  .split('apps')[1]
+                  .split('_')
+                  .filter((_) => !!_)[0]
+                  }/assets/file/${url}`
               },
             },
           },

@@ -1,6 +1,50 @@
 [
   {
-    "pageName": "demo",
-    "title": "demo"
+    "pageName": "createQR",
+    "title": "生成二维码"
+  },
+  {
+    "pageName": "docList",
+    "title": "文章列表"
+  },
+  {
+    "pageName": "home",
+    "title": "首页"
+  },
+  {
+    "pageName": "homeList",
+    "title": "主页"
+  },
+  {
+    "pageName": "transcoderQR",
+    "title": "解析二维码"
+  },
+  {
+    "pageName": "my",
+    "title": "我"
+  },
+  {
+    "pageName": "tool",
+    "title": "实用工具"
+  },
+  {
+    "pageName": "imgWatermark", 
+    "title": "图片水印"
+  },
+  {
+    "pageName": "login",
+    "title": "登录"
+  },
+  {
+    "pageName": "note",
+    "title": "学习笔记"
+  },
+  {
+    "pageName": "reMark",
+    "title": "所见即所得 markdown 编辑查看器"
+  },
+  {
+    "pageName": "urlCoder",
+    "title": "URL转编码"
   }
 ]
