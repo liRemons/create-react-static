@@ -8,12 +8,12 @@ const js = [
   { externalsName: 'mobx-react', url: "https://unpkg.com/mobx-react-lite@3.1.6/dist/mobxreactlite.umd.production.min.js" },
   { externalsName: 'mobx-react', url: "https://unpkg.com/mobx-react@7.3.0/dist/mobxreact.umd.production.min.js" },
   { externalsName: 'moment', url: "https://unpkg.com/moment@2.29.1/min/moment.min.js" },
-  { externalsName: 'antd', url: "https://unpkg.com/moment@2.29.1/min/moment.min.js" },
-  { externalsName: 'antd', url: "https://unpkg.com/antd@4.21.6/dist/antd.min.js" },
+  { externalsName: ['antd', 'antd/dist/antd.css'], url: "https://unpkg.com/moment@2.29.1/min/moment.min.js" },
+  { externalsName: ['antd', 'antd/dist/antd.css'], url: "https://unpkg.com/antd@4.21.6/dist/antd.min.js" },
 ];
 
 const css = [
-  { externalsName: 'antd', url: "https://unpkg.com/antd@4.21.6/dist/antd.min.css", },
+  { externalsName: ['antd', 'antd/dist/antd.css'], url: "https://unpkg.com/antd@4.21.6/dist/antd.min.css", },
 ]
 
 module.exports = {

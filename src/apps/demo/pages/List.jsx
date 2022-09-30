@@ -11,7 +11,7 @@ export default function List() {
     <div>HMR</div>
     <input type="text" />
     <div>
-      {localStore.price}
+      {localStore.price} 元
     </div>
   </div>)
 }
